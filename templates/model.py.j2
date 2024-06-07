@@ -1,0 +1,8 @@
+{% include 'header.py.j2' %}
+
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from .entity import AppEntity
+
+
+class {{ entity_name }}(AppEntity):
+    __tablename__ = "{{ entity_name }}"

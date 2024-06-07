@@ -1,0 +1,23 @@
+{% include 'header.py.j2' %}
+
+from injector import inject
+
+from src.application.schema.{{ entity_name }}.create import {{ entity_name }}CreateSchema
+from src.application.schema.{{ entity_name }}.display import {{ entity_name }}DisplaySchema
+from src.application.schema.{{ entity_name }}.short import {{ entity_name }}ShortSchema
+from src.application.service.base import AppService
+from src.domain.model.coin import {{ entity_name }}
+from src.domain.repository.coin import {{ entity_name }}Repository
+from src.infrastructure.logger.app_logger import AppLogger
+
+
+class {{ entity_name }}Service(AppService[{{ entity_name }}, {{ entity_name }}CreateSchema, {{ entity_name }}DisplaySchema, {{ entity_name }}ShortSchema]):
+    logger: AppLogger
+    repository: {{ entity_name }}Repository
+
+    @inject
+    def __init__(self, logger: AppLogger, repository: {{ entity_name }}Repository):
+        super().__init__(logger, repository=repository)
+
+    def _from_create(self, entity: {{ entity_name }}CreateSchema) -> {{ entity_name }}:
+        return {{ entity_name }}(**entity.model_dump())

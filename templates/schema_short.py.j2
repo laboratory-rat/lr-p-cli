@@ -1,0 +1,8 @@
+{% include 'header.py.j2' %}
+
+from pydantic import ConfigDict
+from src.application.schema.base import BaseEntitySchema
+
+
+class {{ entity_name }}ShortSchema(BaseEntitySchema):
+    model_config = ConfigDict(from_attributes=True)

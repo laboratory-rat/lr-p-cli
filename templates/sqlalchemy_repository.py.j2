@@ -1,0 +1,13 @@
+{% include 'header.py.j2' %}
+
+from injector import inject
+from src.domain.model.{{ entity_name }} import {{ entity_name }}
+from src.domain.repository.{{ entity_name }} import {{ entity_name }}Repository
+from src.infrastructure.repository.alchemy.base import AlchemyRepository
+from src.infrastructure.repository.alchemy.engine import AlchemyEngine
+
+
+class Alchemy{{ entity_name }}Repository(AlchemyRepository[{{ entity_name }}], {{ entity_name }}Repository):
+    @inject
+    def __init__(self, engine: AlchemyEngine):
+        super().__init__(engine)

@@ -1,0 +1,9 @@
+{% include 'header.py.j2' %}
+
+from abc import ABC
+from src.domain.model.{{ entity_name }} import {{ entity_name }}
+from src.domain.repository.base import Repository
+
+
+class {{ entity_name }}Repository(Repository[{{ entity_name }}], ABC):
+    pass
